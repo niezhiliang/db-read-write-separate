@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+
+spring:
+  datasource:
+    name: testdb
+    url: jdbc:mysql://www.niezhiliang.com:3306/testdb?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: adminadmin
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+
+#主数据库 支持写
+master:
+  datasource:
+      name: testdb
+      url: jdbc:mysql://www.niezhiliang.com:3306/testdb?useUnicode=true&characterEncoding=utf8
+      username: root
+      password: adminadmin
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+#从数据库 支持读
+slave:
+  datasource:
+      name: testdb
+      url: jdbc:mysql://www.niezhiliang.com:3316/testdb?useUnicode=true&characterEncoding=utf8
+      username: root
+      password: adminadmin
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+
+
+
+
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mappers/*Mapper.xml
