@@ -5,7 +5,6 @@ spring:
     auto: true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    readSize: 2
   #主数据库
   write:
     datasource:
@@ -20,6 +19,7 @@ spring:
         url: jdbc:mysql://www.niezhiliang.com:3316/testdb?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: adminadmin
+    #这里偷个懒，两个读数据库读的都是一个
     two:
       datasource:
         driverClassName: com.mysql.cj.jdbc.Driver

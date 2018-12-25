@@ -31,9 +31,6 @@ public class TxxsbatisConfiguration {
     @Value("${spring.datasource.type}")
     private Class<? extends DataSource> dataSourceType;
 
-    @Value("${spring.datasource.readSize}")
-    private String dataSourceSize;
-
     @Resource(name = "writeDataSource")
     private DataSource dataSource;
 
@@ -58,12 +55,11 @@ public class TxxsbatisConfiguration {
 
     @Bean
     public AbstractRoutingDataSource roundRobinDataSourceProxy() {
-        int size = Integer.parseInt(dataSourceSize);
-        TxxsAbstractRoutingDataSource proxy = new TxxsAbstractRoutingDataSource(size);
+        TxxsAbstractRoutingDataSource proxy = new TxxsAbstractRoutingDataSource(readDataSources.size());
         Map<Object,Object> targetDataSourceSize = new HashMap<Object,Object>();
         targetDataSourceSize.put(dataSourceType.getTypeName(),dataSource);
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < readDataSources.size(); i++) {
             targetDataSourceSize.put(i,readDataSources.get(i));
         }
         proxy.setDefaultTargetDataSource(dataSource);
